@@ -1,16 +1,12 @@
 Add-Type -AssemblyName PresentationFramework
 
-[xml]$Form =@"
-    <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    Title="Password Reset" Height="350" Width="525" Background="#FF262626">
-        <Grid>
-            
-        </Grid>
-    </Window>
-"@
-
-
+[xml]$Form = Get-content "C:\Users\Kyle\Documents\Projects\Powershell\WPF\Password Reset\App.xaml"
 $NR=(New-Object System.Xml.XmlNodeReader $Form)
 $Win=[Windows.Markup.XamlReader]::Load($NR)
+
+$user = $Win.FindName("UserName")
+$pwd = $Win.FindName("Password")
+$gen = $Win.FindName("GeneratePassword")
+$update = $Win.FindName("Update")
 
 $Win.ShowDialog()
