@@ -29,7 +29,7 @@ Function Generate-Password(){
     Send-MailMessage @params
     }
 
-[xml]$Form = Get-content "C:\Users\Kyle\Documents\Projects\Powershell\WPF\Password Reset\App.xaml"
+[xml]$Form = Get-content ".\Password Reset\App.xaml"
 $NR=(New-Object System.Xml.XmlNodeReader $Form)
 $Win=[Windows.Markup.XamlReader]::Load($NR)
 
@@ -54,7 +54,7 @@ $update.Add_Click({
         [System.Windows.MessageBox]::Show("Please enter a valid UserName before clicking Update and Send.", "User Error")
         }Else{
         Set-Password $alias $password
-        $message="Your password has been reset. Your new password is $password and it must be changes on first use."
+        $message="Your password has been reset. Your new password is $password and it must be changed on first use."
         Email-Password $alias $email $Message
         [System.Windows.MessageBox]::Show("Password for $alias has been updated to be $password and an email has been sent to $email.", "Update Completed")
         $user.text=""
